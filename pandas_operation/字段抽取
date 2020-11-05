@@ -1,0 +1,25 @@
+
+import os
+
+from pandas import read_csv
+
+data = read_csv(
+    os.path.join(
+        os.getcwd(),
+        '4.6', 'data.csv'
+    )
+)
+
+data['tel'] = data['tel'].astype(str)
+
+#运营商
+bands = data['tel'].str.slice(0, 3)
+#地区
+areas = data['tel'].str.slice(3, 7)
+#号码段
+nums = data['tel'].str.slice(7, 11)
+
+#赋值回去
+data['bands'] = bands
+data['areas'] = areas
+data['nums'] = nums

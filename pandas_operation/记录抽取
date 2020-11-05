@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+
+import os
+
+import pandas
+
+data = pandas.read_csv(
+    os.path.join(
+        os.getcwd(),
+        '4.8', 'data.csv'
+    ), 
+    sep="|"
+)
+
+#单条件
+data[data.comments>10000]
+
+#多条件
+data[data.comments.between(1000, 10000)]
+
+#过滤空值所在行
+data[pandas.isnull(data.title)]
+
+#根据关键字过滤
+data[data.title.str.contains('台电', na=False)]
+
+#~为取反
+data[~data.title.str.contains('台电', na=False)]
+
+#组合逻辑条件
+data[(data.comments>=1000) & (data.comments<=10000)]
